@@ -21,7 +21,6 @@
     ></script>
 
     <script>
-      // Custom JS - included beneath Bootstrap
       function populatePostsTable(userId = null) {
         let url = +userId // attempt to convert userId to a number
           ? `https://jsonplaceholder.typicode.com/posts?userId=${+userId}`
@@ -33,25 +32,6 @@
             console.log(data);
           });
       }
-
-      // Execute when the DOM is 'ready'
-      document.addEventListener('DOMContentLoaded', function () {
-        populatePostsTable();
-        populatePostsTable(4); // test with User ID 4 (to be removed after testing)
-      });
-
-      let postRows = `
-  ${data
-    .map(
-      (post) =>
-        `<tr data-id=${post.id}>
-        <td>${post.userId}</td>
-        <td>${post.title}</td>
-        <td>${post.body}</td>
-    </tr>`
-    )
-    .join('')}
-`;
     </script>
 
     <title>Bootstrap Practice</title>
@@ -91,8 +71,6 @@
         </div>
       </div>
     </nav>
-
-    <br />
 
     <div class="container">
       <div class="row">
