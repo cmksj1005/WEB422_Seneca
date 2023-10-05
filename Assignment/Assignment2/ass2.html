@@ -22,31 +22,39 @@
 
     <script>
       console.log('Start');
+      // Execute when the DOM is 'ready'
+      document.addEventListener('DOMContentLoaded', function () {
+        populatePostsTable();
+        //populatePostsTable(4); // test with User ID 4 (to be removed after testing)
+      });
+
       function populatePostsTable(id = null) {
+        console.log('In populatePostsTable function = ' + id);
         let url = +id // attempt to convert userId to a number
-          ? `https://fakestoreapi.com/products/${+id}`
+          ? `https://fakestoreapi.com/products?id=${+id}`
           : `https://fakestoreapi.com/products`;
 
         fetch(url)
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             let postRows = `
-  ${data
-    .map(
-      (post) =>
-        `<tr data-id=${post.id}>
-        <td>${post.id}</td>
-        <td>${post.title}</td>
-        <td>${post.price}</td>
-        <td>${post.description}</td>
-        <td>${post.image}</td>
-        <td>${post.category}</td>
-        <td>${post.rating.rate}</td>
-        <td>${post.rating.count}</td>
-    </tr>`
-    )
-    .join('')}
-`;
+        ${data
+          .map(
+            (post) =>
+              `<tr data-id=${post.id}>
+              <td>${post.id}</td>
+              <td>${post.title}</td>
+              <td>${post.price}</td>
+              <td>${post.description}</td>
+              <td>${post.image}</td>
+              <td>${post.category}</td>
+              <td>${post.rating.rate}</td>
+              <td>${post.rating.count}</td>
+          </tr>`
+          )
+          .join('')}
+      `;
 
             document.querySelector('#postsTable tbody').innerHTML = postRows;
 
@@ -55,46 +63,38 @@
               row.addEventListener('click', (e) => {
                 //console.log('clicked');
 
-                document
-                  .querySelector('#searchForm')
-                  .addEventListener('submit', (event) => {
-                    // prevent the form from from 'officially' submitting
-                    event.preventDefault();
-                    // populate the posts table with the userId value
-                    populatePostsTable(document.querySelector('#id').value);
-                  });
-
                 // add the "click" event listener to the newly created rows
                 document
                   .querySelectorAll('#postsTable tbody tr')
                   .forEach((row) => {
                     row.addEventListener('click', (e) => {
                       let clickedId = row.getAttribute('data-id');
-                      //console.log(clickedId);
+                      console.log(clickedId);
 
-                      fetch(`https://fakestoreapi.com/products/${clickedId}`)
+                      fetch(
+                        `https://fakestoreapi.com/products?limit=${clickedId}`
+                      )
                         .then((res) => res.json())
                         .then((data) => {
-                          //console.log(data);
+                          console.log(data);
                           let commentsList = `
-  <ul class="list-group">
-    ${data
-      .map(
-        (comment) => `
-      <li class="list-group-item">
-
-        <strong>User Id:</strong> ${comment.id}<br />
-        <strong>Title:</strong> ${comment.title}<br />
-        <strong>Price:</strong> ${comment.price}<br />
-        <strong>Description:</strong> ${comment.description}<br />
-        <strong>Image:</strong> ${comment.image}<br />
-        <strong>Category:</strong> ${comment.category}<br />
-      </li>
-    `
-      )
-      .join('')}
-  </ul>
-`;
+        <ul class="list-group">
+          ${data
+            .map(
+              (comment) => `
+            <li class="list-group-item">
+              <strong>Id:</strong> ${comment.id}<br />
+              <strong>Title:</strong> ${comment.title}<br />
+              <strong>Price:</strong> ${comment.price}<br />
+              <strong>Description:</strong> ${comment.description}<br />
+              <strong>Image:</strong> ${comment.image}<br />
+              <strong>Category:</strong> ${comment.category}<br />
+            </li>
+          `
+            )
+            .join('')}
+        </ul>
+      `;
 
                           document.querySelector(
                             '#commentsModal .modal-body'
@@ -114,14 +114,17 @@
                   });
               });
             });
+
+            document
+              .querySelector('#searchForm')
+              .addEventListener('submit', (event) => {
+                // prevent the form from from 'officially' submitting
+                event.preventDefault();
+                // populate the posts table with the userId value
+                populatePostsTable(document.querySelector('#id').value);
+              });
           });
       }
-
-      // Execute when the DOM is 'ready'
-      document.addEventListener('DOMContentLoaded', function () {
-        populatePostsTable();
-        //populatePostsTable(4); // test with User ID 4 (to be removed after testing)
-      });
     </script>
 
     <title>Bootstrap Practice</title>
@@ -168,7 +171,7 @@
           <table class="table table-hover" id="postsTable">
             <thead>
               <tr>
-                <th>User ID</th>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Description</th>
