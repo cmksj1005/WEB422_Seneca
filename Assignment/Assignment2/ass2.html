@@ -31,7 +31,7 @@
       function populatePostsTable(id = null) {
         console.log('In populatePostsTable function = ' + id);
         let url = +id // attempt to convert userId to a number
-          ? `https://fakestoreapi.com/products?id=${+id}`
+          ? `https://fakestoreapi.com/products?limit=${+id}`
           : `https://fakestoreapi.com/products`;
 
         fetch(url)
