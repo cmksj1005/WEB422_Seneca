@@ -7,6 +7,6 @@ export default function Hello(props) {
 }
 
 Hello.defaultProps = {
-  fName: 'Shinjo',
-  lName: 'Kang',
+  fName: 'First Name',
+  lName: 'Last Name',
 };

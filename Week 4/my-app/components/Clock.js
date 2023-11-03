@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Clock(props) {
-  const dateState = useState(null);
-  const date = dateState[0];
-  const setDate = dateState[1];
+  const [date, setDate] = useState(null); // Note: Never set this to unknown data obtained at run time (ie: new Date(), a random number, etc.) - see: https://nextjs.org/docs/messages/react-hydration-error
 
   useEffect(() => {
     setDate(new Date());
