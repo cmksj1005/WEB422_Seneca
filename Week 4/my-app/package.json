@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "13.5.4",
+    "nexty": "^0.0.1",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "13.5.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "13.5.4"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "author": "Shinjo Kang",
+  "license": "ISC"
 }
