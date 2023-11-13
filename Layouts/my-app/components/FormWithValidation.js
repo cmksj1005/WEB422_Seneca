@@ -30,15 +30,15 @@ export default function FormWithValidation() {
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       First Name: <br />
-      <input {...register('firstName')} />
+      <input {...register('firstName', { required: true, maxLength: 20 })} />
       <br />
       <br />
       Last Name: <br />
-      <input {...register('lastName')} />
+      <input {...register('lastName', { pattern: /^[A-Za-z]+$/i })} />
       <br />
       <br />
       Age: <br />
-      <input type="number" {...register('age')} />
+      <input type="number" {...register('age', { min: 18, max: 99 })} />
       <br />
       <br />
       <button type="submit">Update User</button>
