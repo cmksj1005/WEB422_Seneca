@@ -1,9 +1,14 @@
-export function middleware(request) {
-  if (request.nextUrl.pathname.startsWith('/about')) {
-    console.log('Visiting About');
-  }
+import { NextResponse } from 'next/server';
 
-  if (request.nextUrl.pathname.startsWith('/api/users')) {
-    console.log('Visiting the Users API');
+export function middleware(request) {
+  const requestHeaders = new Headers(request.headers);
+  const language = requestHeaders.get('Accept-Language');
+
+  if (language.includes('fr')) {
+    return NextResponse.rewrite(new URL('/fr/about', request.url));
   }
 }
+
+export const config = {
+  matcher: ['/about'],
+};
