@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jotai": "^2.5.1",
     "mongoose": "^8.0.0"
   }
 }
