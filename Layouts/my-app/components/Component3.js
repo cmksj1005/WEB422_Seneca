@@ -1,3 +1,7 @@
-export default function Component3(props) {
-  return <>Value: {props.count}</>;
+import { useContext } from 'react';
+import { CountContext } from '@/pages/_app';
+
+export default function Component3() {
+  const count = useContext(CountContext);
+  return <>Value: {count}</>;
 }
