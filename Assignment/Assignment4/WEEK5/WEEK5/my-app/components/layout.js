@@ -15,7 +15,8 @@ export default function Layout(props) {
           <Link href="/">Home</Link> | <Link href="/about">About</Link> |{' '}
           <Link href="/productdetails">Product Details</Link> |{' '}
           <Link href="/dashboard">Dashboard</Link> |{' '}
-          <Link href="/dashboard/preferences">Dashboard Preferences</Link>
+          <Link href="/dashboard/preferences">Dashboard Preferences</Link> |{' '}
+          <Link href="/shoppingcart">Shopping Cart</Link>
         </div>
       </div>
       <hr />
