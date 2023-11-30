@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useAtom } from 'jotai';
+import { cartListAtom } from '@/store';
 import Logo from '@/components/Logo';
 import styles from '@/styles/Home.module.css';
 import { useRouter } from 'next/router';
@@ -6,6 +8,7 @@ import { useRouter } from 'next/router';
 export default function Layout(props) {
   //const router = useRouter();
   //router.push('/'); // navigate to the home route "/"
+  const [cartList, setCartList] = useAtom(cartListAtom);
   return (
     <>
       <div className={styles['header']}>
@@ -13,10 +16,10 @@ export default function Layout(props) {
         <div className={styles['title']}>
           <h1>Joe's Facroty</h1>
           <Link href="/">Home</Link> | <Link href="/about">About</Link> |{' '}
-          <Link href="/productdetails">Product Details</Link> |{' '}
-          <Link href="/dashboard">Dashboard</Link> |{' '}
-          <Link href="/dashboard/preferences">Dashboard Preferences</Link> |{' '}
-          <Link href="/shoppingcart">Shopping Cart</Link>
+          <Link href="/products">Products</Link> |{' '}
+          <Link href="/cart">
+            Shopping Cart <span>({cartList.length})</span>
+          </Link>
         </div>
       </div>
       <hr />
